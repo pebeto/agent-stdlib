@@ -1,0 +1,18 @@
+{
+  "name": "agent-stdlib",
+  "version": "0.1.0",
+  "description": "Agent-building practices from Anthropic's engineering blog, packaged as installable Claude Code skills (with MCP servers and hooks to follow). Covers the gaps no existing skill pack fills.",
+  "author": {
+    "name": "José Esparza"
+  },
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "skills",
+    "evals",
+    "context-engineering",
+    "sandboxing",
+    "mcp",
+    "anthropic"
+  ]
+}
