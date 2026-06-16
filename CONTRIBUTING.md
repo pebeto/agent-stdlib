@@ -1,8 +1,8 @@
 # Contributing
 
 This pack distills Anthropic's engineering blog into installable Claude Code
-components. A contribution earns its place by closing a gap, not by restating
-what another skill already covers.
+components. A contribution earns its place by closing a gap another skill leaves
+open.
 
 ## Proposing a new skill
 
@@ -12,9 +12,9 @@ Before writing one, check two things:
    procedure does not come from a documented practice, it belongs in a different
    repo.
 2. **No existing skill already covers it well.** Search the public skill
-   ecosystem first. If a solid skill exists, either improve that one or state
-   plainly how yours differs. The README's "Already covered elsewhere" list
-   shows the topics this pack deliberately skips.
+   ecosystem first. If a solid skill exists, improve that one, or state plainly
+   how yours differs. The README's "Already covered elsewhere" list shows the
+   topics this pack deliberately skips.
 
 ## Skill layout
 
@@ -34,7 +34,7 @@ near-misses; that field decides whether the skill is ever used.
 
 ## Scripts
 
-Keep bundled scripts dependency-free where you can. The two in this pack run on
+Keep bundled scripts dependency-free where you can. The ones in this pack run on
 a standard Python install with no third-party packages, so anyone can run them
 without a setup step. Hold that bar unless a dependency is unavoidable.
 
@@ -43,9 +43,10 @@ without a setup step. Hold that bar unless a dependency is unavoidable.
 Write the way the existing skills read: direct, specific, active voice, no
 filler. Run a slop check before you open a pull request.
 
-## Phases
+## Where a contribution goes
 
-The repo reserves `mcp-servers/`, `commands/`, `agents/`, and `hooks/` for the
-runtime capabilities and enforcement layers the skills describe. A skill that
-needs a tool to exist (rather than knowledge the model applies) belongs in one
-of those, not in `skills/`.
+Knowledge the model reads and applies is a skill, under `skills/`. A capability
+the agent calls at runtime is an MCP server, under `mcp-servers/`. Behavior the
+harness must enforce, because the model cannot be trusted to enforce it on
+itself, is a hook under `hooks/`. Commands and agents in `commands/` and
+`agents/` wrap any of these into one-step invocations.

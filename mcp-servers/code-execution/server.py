@@ -16,13 +16,14 @@ Three tools:
   read_tool(name)     read one module's source (progressive disclosure)
   run_python(code)    execute code with the tools package importable
 
-SECURITY: run_python executes model-written code. This server applies a wall-
-clock timeout, POSIX resource limits (CPU, memory, file size), and a temporary
-working directory, but it is a REFERENCE, not a hardened sandbox. It does not
-contain the network or the filesystem. Before running it on anything you care
-about, wrap it in real OS-level isolation. The `sandboxing-agentic-systems`
-skill in this pack describes how (filesystem + network isolation that covers
-subprocesses, an egress proxy, credentials kept outside the sandbox).
+Security note: run_python executes model-written code. The server applies a
+wall-clock timeout, POSIX resource limits (CPU, memory, file size), and a
+temporary working directory, but treat it as a reference rather than a hardened
+sandbox. It does not isolate the network or the wider filesystem. Wrap it in
+real OS-level isolation before running it on anything you care about. The
+`sandboxing-agentic-systems` skill in this pack describes how: filesystem and
+network isolation that covers subprocesses, an egress proxy, and credentials
+kept outside the sandbox.
 
 Source: https://www.anthropic.com/engineering/code-execution-with-mcp
 
@@ -69,7 +70,7 @@ def list_tools() -> str:
     for p in sorted(TOOLS_DIR.glob("*.py")):
         if p.name == "__init__.py":
             continue
-        mods.append(f"tools.{p.stem} — {_first_docstring_line(p)}")
+        mods.append(f"tools.{p.stem}: {_first_docstring_line(p)}")
     header = ("Import these in run_python, e.g. `from tools import text_utils`.\n"
               "Read a module with read_tool before using it.\n\n")
     return header + "\n".join(mods)

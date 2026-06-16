@@ -24,9 +24,9 @@ server as a reference for the pattern, not a finished sandbox.
 
 ## The three tools
 
-- **`list_tools()`** — list the importable tool modules.
-- **`read_tool(name)`** — read a module's source before you use it.
-- **`run_python(code, timeout_seconds=10)`** — run code with the `tools`
+- **`list_tools()`**: list the importable tool modules.
+- **`read_tool(name)`**: read a module's source before you use it.
+- **`run_python(code, timeout_seconds=10)`**: run code with the `tools`
   package importable; returns stdout and stderr. Timeout caps at 60s.
 
 The `tools/` directory holds two dependency-free examples (`text_utils`,

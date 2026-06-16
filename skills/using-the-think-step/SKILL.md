@@ -17,7 +17,7 @@ description: >-
 
 # Using the think step
 
-Source: [The "think" tool](https://www.anthropic.com/engineering/claude-think-tool). The pattern ships as MCP servers around the web; none package the judgment of *when* to use it and how to prompt it. This pack's Phase 2 ships the tool itself; this skill is about reaching for it well.
+Source: [The "think" tool](https://www.anthropic.com/engineering/claude-think-tool). The pattern ships as MCP servers around the web; none package the judgment of *when* to use it and how to prompt it. This pack ships the tool itself under `mcp-servers/think/`; this skill is about reaching for it well.
 
 The think tool is a no-op the model can call to reason in the middle of a tool-use chain. It changes no state and returns nothing useful; its only job is to give the model a moment to lay out its reasoning before the next action. That makes it different from extended thinking, which happens once before the agent acts. The think step happens *between* actions, after the agent has seen a tool result and before it commits to what comes next.
 

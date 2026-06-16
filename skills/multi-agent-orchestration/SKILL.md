@@ -15,7 +15,7 @@ description: >-
 
 # Multi-agent orchestration
 
-Source: [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system). The pattern lives in Anthropic's cookbook as notebooks and prompts. This packages the parallel-research recipe as a skill, with the judgment of when to use it. Phase 3 of this pack adds a `/research` command and a worker subagent.
+Source: [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system). The pattern lives in Anthropic's cookbook as notebooks and prompts. This packages the parallel-research recipe as a skill, with the judgment of when to use it. The pack also ships a `/research` command and a `research-worker` subagent that run this flow.
 
 A lead agent plans a question, spawns several subagents to chase parts of it in parallel, and synthesizes what they return. Each subagent has its own context window, so the system explores far more ground than one agent could hold at once. That power has a price, so the first decision is whether to use it at all.
 

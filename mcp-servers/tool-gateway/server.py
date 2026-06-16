@@ -77,30 +77,30 @@ def _json_validate(text: str) -> dict:
 CATALOG = {
     "text_stats": {
         "description": "Count the characters, words, and lines in a piece of text.",
-        "schema": {"text": "string — the text to measure"},
+        "schema": {"text": "the text to measure (string)"},
         "fn": _text_stats,
     },
     "temp_convert": {
         "description": "Convert a temperature between Celsius, Fahrenheit, and Kelvin.",
         "schema": {
-            "value": "number — the temperature to convert",
-            "from_unit": "string — C, F, or K",
-            "to_unit": "string — C, F, or K",
+            "value": "the temperature to convert (number)",
+            "from_unit": "C, F, or K (string)",
+            "to_unit": "C, F, or K (string)",
         },
         "fn": _temp_convert,
     },
     "base_convert": {
         "description": "Convert an integer from one numeric base to another (2 to 36).",
         "schema": {
-            "number": "string — the integer, written in from_base",
-            "from_base": "integer — 2 to 36",
-            "to_base": "integer — 2 to 36",
+            "number": "the integer, written in from_base (string)",
+            "from_base": "base of the input, 2 to 36 (integer)",
+            "to_base": "base to convert to, 2 to 36 (integer)",
         },
         "fn": _base_convert,
     },
     "json_validate": {
         "description": "Check whether a string is valid JSON and pretty-print it.",
-        "schema": {"text": "string — the JSON text to validate"},
+        "schema": {"text": "the JSON text to validate (string)"},
         "fn": _json_validate,
     },
 }

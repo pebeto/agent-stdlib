@@ -2,15 +2,11 @@
 
 A standard library for building agents.
 
-Anthropic's engineering blog documents how to build, evaluate, and run agents in production. Most of that knowledge never gets packaged as something you can install. It stays as prose you reread when you hit the problem it solves. `agent-stdlib` turns the parts nobody has packaged into Claude Code skills you load on demand, with MCP servers and hooks arriving in later phases.
+Anthropic's engineering blog documents how to build, evaluate, and run agents in production. Most of that knowledge never ships as something you can install; it stays prose you reopen when you hit the problem it solves. `agent-stdlib` packages the parts nobody else has: Claude Code skills, a few MCP servers, and a tool-gating hook.
 
 Each component names the article it comes from and says how it differs from any skill that already covers similar ground. The pack ships only what was missing. Topics that strong community skills already handle stay out, with pointers below.
 
-## Status
-
-Phase 1 (the skills) and Phase 2 (the MCP servers) ship now. Phase 3 adds the hook and command layer: action gating, a research command, an autonomous-loop runner. The repository reserves space for those, so pulling a later phase changes nothing about how you use what's already here.
-
-## What's inside (Phase 1)
+## Skills
 
 | Skill | What it gives you | Source article |
 |-------|-------------------|----------------|
@@ -36,13 +32,19 @@ Skills trigger themselves when a task matches their description. You can also lo
 
 ## MCP servers
 
-Phase 2 ships three servers under `mcp-servers/`, each pairing with a skill. Running them needs [`uv`](https://docs.astral.sh/uv/); it installs each server's one dependency from the script header on first run.
+Three servers live under `mcp-servers/`, each paired with a skill. They need [`uv`](https://docs.astral.sh/uv/), which installs each server's one dependency from the script header on first run.
 
-- **think** (enabled) — the no-op `think` tool. Pairs with `using-the-think-step`.
-- **tool-gateway** (enabled) — `search_tools` + `call_tool` over a larger catalog, so the agent reaches many tools through two. Pairs with the scaling-tools work in `advanced-tool-use`.
-- **code-execution** (opt-in) — presents tools as importable code and runs composed Python in a subprocess. It executes model-written code, so it is **not enabled by default**. Add it yourself once you have wrapped it in real isolation; see `mcp-servers/code-execution/README.md` and the `sandboxing-agentic-systems` skill.
+- **think** (enabled). The no-op `think` tool, paired with `using-the-think-step`.
+- **tool-gateway** (enabled). `search_tools` and `call_tool` over a larger catalog, so the agent reaches many tools through two. Paired with the tool-scaling guidance in `advanced-tool-use`.
+- **code-execution** (opt-in). Presents tools as importable code and runs composed Python in a subprocess. It executes model-written code, so it is not enabled by default. Turn it on once you have wrapped it in real isolation; see `mcp-servers/code-execution/README.md` and the `sandboxing-agentic-systems` skill.
 
 `think` and `tool-gateway` are wired into the plugin's `.mcp.json`. To enable `code-execution`, point your client's MCP config at `uv run .../mcp-servers/code-execution/server.py`.
+
+## Commands, agent, and gate
+
+- **`/research <question>`** runs the orchestrator-worker flow: it decomposes the question, dispatches `research-worker` subagents in parallel, and synthesizes a cited answer. Paired with `multi-agent-orchestration`.
+- **`/autonomous-loop`** sets up lock-file coordination for unsupervised agents on one repo, using `scripts/locks.py` and `scripts/autonomy_loop.sh`. Paired with `parallel-autonomous-agents`.
+- **action-gating** is a `PreToolUse` hook that tiers Bash commands by risk and denies or asks on the dangerous ones. It stays off until you set `AGENT_STDLIB_GATING=warn` or `enforce`, and it only ever adds friction. See `hooks/README.md`.
 
 ## Already covered elsewhere
 
@@ -57,11 +59,11 @@ These topics from the same blog have solid community skills, so they stay out of
 
 ## Provenance
 
-This pack distills public writing on the Anthropic engineering blog. It is an independent project. It carries no endorsement from Anthropic and ships no Anthropic code.
+This pack distills public writing on the Anthropic engineering blog. It is an independent project with no endorsement from Anthropic, and it ships no Anthropic code.
 
 ## Contributing
 
-Each skill stands alone in `skills/<name>/SKILL.md` and opens with the article it distills. Improvements that sharpen a skill's triggering description, add a worked example, or close a gap against the source article are welcome.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Each skill stands alone in `skills/<name>/SKILL.md` and opens with the article it distills.
 
 ## License
 

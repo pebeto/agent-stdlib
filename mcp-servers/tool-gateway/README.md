@@ -10,10 +10,10 @@ Source: [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-
 
 ## The two tools
 
-- **`search_tools(query, detail)`** — ranks the catalog against a plain-language
+- **`search_tools(query, detail)`**: ranks the catalog against a plain-language
   query and returns the matches. `detail="summary"` returns names and
   descriptions; `detail="full"` adds each tool's argument schema.
-- **`call_tool(name, arguments)`** — invokes a catalog tool by name. Unknown
+- **`call_tool(name, arguments)`**: invokes a catalog tool by name. Unknown
   names and bad arguments return an actionable error, not a crash.
 
 ## What this covers, and what it does not
