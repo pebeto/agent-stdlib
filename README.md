@@ -28,8 +28,8 @@ Phase 1 ships the skills. Phase 2 adds MCP servers (a `think` tool, a tool-searc
 Add the marketplace and install the plugin:
 
 ```
-/plugin marketplace add <your-org>/agent-stdlib
-/plugin install agent-stdlib
+/plugin marketplace add pebeto/agent-stdlib
+/plugin install agent-stdlib@agent-stdlib
 ```
 
 Skills trigger themselves when a task matches their description. You can also load one explicitly with the `Skill` tool.

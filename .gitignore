@@ -1,6 +1,9 @@
 # Internal design docs — not part of the published pack
 docs/
 
+# Skill-triggering eval workspaces — not part of the published pack
+.eval/
+
 # Python
 __pycache__/
 *.py[cod]
