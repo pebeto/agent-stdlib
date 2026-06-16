@@ -9,7 +9,8 @@ description: >-
   non-deterministic output, set up an LLM-as-judge, or asks any version of "how
   do I know if my agent is actually getting better." Trigger even when they say
   "tests for my agent," "eval set," or "agent benchmark" rather than the word
-  "evals."
+  "evals." Not for container or resource limits making scores flaky across
+  runs; that's calibrate-eval-infrastructure.
 ---
 
 # Build agent evals

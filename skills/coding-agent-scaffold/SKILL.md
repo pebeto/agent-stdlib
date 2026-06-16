@@ -10,6 +10,8 @@ description: >-
   to impose, or debugging an agent that keeps editing the wrong place, fumbling
   multi-line edits, or escaping shell commands wrong. Trigger on "build a coding
   agent," "str_replace tool," "agent keeps breaking the file," and similar.
+  Not for general MCP or service tool design; this is the bash plus
+  file-editor interface specifically.
 ---
 
 # Coding agent scaffold

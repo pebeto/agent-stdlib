@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "agent-stdlib-think": {
+      "command": "uv",
+      "args": ["run", "${CLAUDE_PLUGIN_ROOT}/mcp-servers/think/server.py"]
+    },
+    "agent-stdlib-tool-gateway": {
+      "command": "uv",
+      "args": ["run", "${CLAUDE_PLUGIN_ROOT}/mcp-servers/tool-gateway/server.py"]
+    }
+  }
+}

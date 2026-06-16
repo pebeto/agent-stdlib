@@ -9,7 +9,8 @@ description: >-
   suspects OOM kills or flaky infra are skewing results, sets container memory
   or CPU limits for an eval harness, or wants to trust a leaderboard delta.
   Trigger on "my benchmark scores are inconsistent," "OOM during eval," "how
-  much memory should the eval container get," and similar.
+  much memory should the eval container get," and similar. Not for designing
+  the eval tasks or graders themselves; that's build-agent-evals.
 ---
 
 # Calibrate eval infrastructure

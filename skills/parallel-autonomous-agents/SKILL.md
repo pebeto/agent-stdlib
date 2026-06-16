@@ -10,7 +10,9 @@ description: >-
   from duplicating work or clobbering each other, sets up an unattended or
   overnight agent run, or asks how agents claim and release tasks. Trigger on
   "parallel agents on one repo," "agents keep doing the same task," "autonomy
-  loop," "unsupervised agents," and similar.
+  loop," "unsupervised agents," and similar. Not for breadth-first research
+  across subagents (that's multi-agent-orchestration) or crash-recovery
+  architecture (that's durable-agent-architecture).
 ---
 
 # Parallel autonomous agents

@@ -8,7 +8,7 @@ Each component names the article it comes from and says how it differs from any 
 
 ## Status
 
-Phase 1 ships the skills. Phase 2 adds MCP servers (a `think` tool, a tool-search gateway, a code-execution runtime). Phase 3 adds the hook and command layer (action gating, a research command, an autonomous-loop runner). The repository layout already reserves space for those, so installing Phase 1 today and pulling Phase 2 later changes nothing about how you use it.
+Phase 1 (the skills) and Phase 2 (the MCP servers) ship now. Phase 3 adds the hook and command layer: action gating, a research command, an autonomous-loop runner. The repository reserves space for those, so pulling a later phase changes nothing about how you use what's already here.
 
 ## What's inside (Phase 1)
 
@@ -33,6 +33,16 @@ Add the marketplace and install the plugin:
 ```
 
 Skills trigger themselves when a task matches their description. You can also load one explicitly with the `Skill` tool.
+
+## MCP servers
+
+Phase 2 ships three servers under `mcp-servers/`, each pairing with a skill. Running them needs [`uv`](https://docs.astral.sh/uv/); it installs each server's one dependency from the script header on first run.
+
+- **think** (enabled) — the no-op `think` tool. Pairs with `using-the-think-step`.
+- **tool-gateway** (enabled) — `search_tools` + `call_tool` over a larger catalog, so the agent reaches many tools through two. Pairs with the scaling-tools work in `advanced-tool-use`.
+- **code-execution** (opt-in) — presents tools as importable code and runs composed Python in a subprocess. It executes model-written code, so it is **not enabled by default**. Add it yourself once you have wrapped it in real isolation; see `mcp-servers/code-execution/README.md` and the `sandboxing-agentic-systems` skill.
+
+`think` and `tool-gateway` are wired into the plugin's `.mcp.json`. To enable `code-execution`, point your client's MCP config at `uv run .../mcp-servers/code-execution/server.py`.
 
 ## Already covered elsewhere
 

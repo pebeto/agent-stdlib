@@ -11,7 +11,8 @@ description: >-
   results, needs to limit what an autonomous agent can reach or delete, or asks
   where an agent's credentials should live. Trigger on "sandbox the agent,"
   "agent runs untrusted code," "prompt injection," "restrict network access,"
-  and similar.
+  and similar. This is environment containment; deciding which actions need
+  approval before they run is a separate concern (action gating).
 ---
 
 # Sandboxing agentic systems

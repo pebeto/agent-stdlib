@@ -10,7 +10,9 @@ description: >-
   makes long sequential decisions, asks whether to add a think or scratchpad
   tool, finds an agent skipping rules or mishandling tool output mid-task, or
   wants more deliberate tool use. Trigger on "think tool," "let the agent reason
-  before acting," "agent ignores the policy," and similar.
+  before acting," "agent ignores the policy," and similar. Not for general
+  prompt engineering or one-shot chain-of-thought, and not the same as
+  extended thinking before a turn.
 ---
 
 # Using the think step

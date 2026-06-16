@@ -10,7 +10,9 @@ description: >-
   session state when a container dies, needs to scale agents as a service, or
   asks where to keep credentials for an agent that runs code. Trigger on "agent
   infrastructure," "resume an agent after a crash," "agent runs for hours,"
-  "where do tokens live," and similar.
+  "where do tokens live," and similar. Not for parallelizing work across
+  agents or coordinating a shared repo; see multi-agent-orchestration and
+  parallel-autonomous-agents.
 ---
 
 # Durable agent architecture
