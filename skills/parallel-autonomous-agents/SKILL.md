@@ -23,7 +23,7 @@ The goal is sustained parallel progress on one codebase with nobody watching. Se
 
 ## The autonomy loop
 
-Each agent runs in a loop that picks the next task, does it, and respawns without pausing for a human. A simple shape is a script that calls `claude -p "<prompt>"` in a fresh container per session, so context never accumulates across tasks and a wedged session cannot poison the next. The loop is what turns a one-shot agent into one that works through a backlog overnight.
+Each agent runs in a loop that picks the next task, does it, and respawns without pausing for a human. A simple shape is a script that calls a headless agent CLI (`claude -p`, `opencode run`, or any other) in a fresh container per session, so context never accumulates across tasks and a wedged session cannot poison the next. The loop is what turns a one-shot agent into one that works through a backlog overnight.
 
 ## Lock files claim work
 

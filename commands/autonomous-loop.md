@@ -9,7 +9,7 @@ the `parallel-autonomous-agents` skill.
 Context for what they passed: $ARGUMENTS
 
 The loop itself runs in the shell, not inside this session, because it spawns
-many fresh `claude -p` sessions over time. Your job here is to set it up and
+many fresh headless agent sessions over time. Your job here is to set it up and
 explain it, not to run an overnight loop yourself.
 
 Do this:
@@ -32,7 +32,8 @@ Do this:
 
    Run several copies in parallel (separate terminals or containers), each with
    a distinct agent id. They share `current_tasks/` and stay off each other's
-   work.
+   work. The loop calls `claude -p` by default; for another harness set
+   `AGENT_RUNNER`, e.g. `AGENT_RUNNER="opencode run" scripts/autonomy_loop.sh tasks.txt agent-1`.
 
 4. **Point at the steering mechanism.** With no human in the loop, the test
    suite is the steering wheel. Confirm they have a comprehensive suite and that

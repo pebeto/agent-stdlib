@@ -46,6 +46,10 @@ Three servers live under `mcp-servers/`, each paired with a skill. They need [`u
 - **`/autonomous-loop`** sets up lock-file coordination for unsupervised agents on one repo, using `scripts/locks.py` and `scripts/autonomy_loop.sh`. Paired with `parallel-autonomous-agents`.
 - **action-gating** is a `PreToolUse` hook that tiers Bash commands by risk and denies or asks on the dangerous ones. It stays off until you set `AGENT_STDLIB_GATING=warn` or `enforce`, and it only ever adds friction. See `hooks/README.md`.
 
+## Beyond Claude Code
+
+Most of this pack is not Claude-specific. The MCP servers speak the open MCP protocol, the scripts are plain Python and Bash, and the skill content is harness-neutral procedural knowledge. To use it in OpenCode, Cursor, Cline, or a custom agent on any model, see [AGENTS.md](AGENTS.md), which maps each component to its portable form.
+
 ## Already covered elsewhere
 
 These topics from the same blog have solid community skills, so they stay out of this pack. Reach for these instead:

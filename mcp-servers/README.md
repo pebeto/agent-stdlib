@@ -11,3 +11,7 @@ server's one dependency from the script header on first run.
 
 `think` and `tool-gateway` are wired into the repo-root `.mcp.json`. Enable
 `code-execution` by hand once you have isolated it.
+
+These are standard MCP stdio servers, so any MCP client can mount them, not just
+Claude Code. See [AGENTS.md](../AGENTS.md) for a vendor-neutral config and notes
+for OpenCode, Cursor, and Cline.
