@@ -18,8 +18,9 @@ Cursor, Cline, or a custom agent, on any tool-using model.
 - **Skills** (`skills/<name>/SKILL.md`): the content is harness-neutral; the
   auto-loading and triggering is a Claude Code feature. Load the file as a rule
   or paste its body into your system prompt. See "Use the skills as plain content".
-- **action-gating hook** (`hooks/`): the classification logic is reusable; the
-  `hooks.json` wiring and the input JSON shape are Claude Code's. See "Port the gate".
+- **hooks** (`hooks/`): the classification logic in both the action gate and the
+  injection screen is reusable; the `hooks.json` wiring and the input JSON shapes
+  are Claude Code's. See "Port the hooks".
 - **Commands and agent** (`commands/`, `agents/`): Claude Code formats that also
   rely on its subagent dispatch. Reuse the recipe inside them, not the files.
 
@@ -57,7 +58,7 @@ own `opencode.json` under an `mcp` key; use the same command and args. Add
 `code-execution` the same way only after you have isolated it, since it runs
 model-written code.
 
-## Port the gate
+## Port the hooks
 
 `hooks/action_gate.py` reads a tool call on stdin and decides allow, ask, or
 deny. The reusable core is `classify(command)`, which sorts a command into
@@ -67,6 +68,13 @@ adapt the stdin parsing (it reads `{"tool_name", "tool_input": {"command"}}`) an
 the output (it prints Claude Code's `hookSpecificOutput`) to your harness's
 contract. The tiering and the deny-or-ask stance are the portable ideas; the I/O
 shapes are the glue.
+
+`hooks/injection_screen.py` mirrors this shape on the inbound side. Its reusable
+core is `screen(text)`, which scans tool output for injection markers and returns
+whether it is suspicious, the categories matched, and a reason. Call `screen()`
+from your harness's post-execution hook, or adapt the stdin parsing (it reads
+`{"tool_response"}`) and the output (it prints a `PostToolUse` decision). The
+flag-never-trust stance and the marker list are the portable ideas.
 
 ## Model notes
 

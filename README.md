@@ -15,6 +15,7 @@ Each component names the article it comes from and says how it differs from any 
 | `coding-agent-scaffold` | Design the two-tool (bash + file editor) interface for a coding agent so the model stops misusing it | [Raising the bar on SWE-bench Verified](https://www.anthropic.com/engineering/swe-bench-sonnet) |
 | `durable-agent-architecture` | Split an agent service into brain, hands, and session so any part can crash and resume | [Scaling Managed Agents](https://www.anthropic.com/engineering/managed-agents) |
 | `sandboxing-agentic-systems` | Contain an agent that runs code or reads untrusted content, layer by layer | [How we contain Claude](https://www.anthropic.com/engineering/how-we-contain-claude) |
+| `defending-against-prompt-injection` | Keep an agent from obeying instructions hidden in the pages, emails, and files it reads | [Mitigate jailbreaks and prompt injection](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) |
 | `using-the-think-step` | Decide when a mid-task reasoning step helps and how to prompt for it | [The "think" tool](https://www.anthropic.com/engineering/claude-think-tool) |
 | `multi-agent-orchestration` | Run an orchestrator-worker research system with parallel subagents | [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) |
 | `parallel-autonomous-agents` | Coordinate unsupervised agents on one git repo with lock files and an autonomy loop | [Building a C compiler with parallel Claudes](https://www.anthropic.com/engineering/building-c-compiler) |
@@ -40,11 +41,12 @@ Three servers live under `mcp-servers/`, each paired with a skill. They need [`u
 
 `think` and `tool-gateway` are wired into the plugin's `.mcp.json`. To enable `code-execution`, point your client's MCP config at `uv run .../mcp-servers/code-execution/server.py`.
 
-## Commands, agent, and gate
+## Commands, agent, and hooks
 
 - **`/research <question>`** runs the orchestrator-worker flow: it decomposes the question, dispatches `research-worker` subagents in parallel, and synthesizes a cited answer. Paired with `multi-agent-orchestration`.
 - **`/autonomous-loop`** sets up lock-file coordination for unsupervised agents on one repo, using `scripts/locks.py` and `scripts/autonomy_loop.sh`. Paired with `parallel-autonomous-agents`.
 - **action-gating** is a `PreToolUse` hook that tiers Bash commands by risk and denies or asks on the dangerous ones. It stays off until you set `AGENT_STDLIB_GATING=warn` or `enforce`, and it only ever adds friction. See `hooks/README.md`.
+- **injection-screening** is a `PostToolUse` hook that flags likely prompt-injection markers in fetched tool output and, on a hit, warns the agent or blocks it from acting until you confirm. Off until you set `AGENT_STDLIB_INJECTION=warn` or `enforce`. Paired with `defending-against-prompt-injection`. See `hooks/README.md`.
 
 ## Beyond Claude Code
 

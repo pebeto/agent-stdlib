@@ -1,7 +1,7 @@
 {
   "name": "agent-stdlib",
-  "version": "0.3.0",
-  "description": "Agent-building practices from Anthropic's engineering blog, packaged as installable Claude Code skills, MCP servers, and a tool-gating hook. Covers the gaps no existing skill pack fills.",
+  "version": "0.4.0",
+  "description": "Agent-building practices from Anthropic's engineering blog, packaged as installable Claude Code skills, MCP servers, and safety hooks for tool-gating and prompt-injection screening. Covers the gaps no existing skill pack fills.",
   "author": {
     "name": "José Esparza"
   },
