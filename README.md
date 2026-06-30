@@ -12,8 +12,11 @@ Each component names the article it comes from and says how it differs from any 
 |-------|-------------------|----------------|
 | `build-agent-evals` | Build automated evals for an agent: pick a grader, choose pass@k vs pass^k, run the zero-to-one roadmap | [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) |
 | `calibrate-eval-infrastructure` | Stop container resource limits from swinging benchmark scores more than the models do | [Quantifying infrastructure noise in agentic coding evals](https://www.anthropic.com/engineering/infrastructure-noise) |
+| `reward-hacking-and-inoculation` | Keep an agent from gaming a checkable goal, with inoculation prompting and graders that pay for the work | [Emergent misalignment from reward hacking](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) |
 | `coding-agent-scaffold` | Design the two-tool (bash + file editor) interface for a coding agent so the model stops misusing it | [Raising the bar on SWE-bench Verified](https://www.anthropic.com/engineering/swe-bench-sonnet) |
+| `advanced-tool-use` | Reach a large tool catalog through a few tools: search on demand, call from code, learn from examples | [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use) |
 | `durable-agent-architecture` | Split an agent service into brain, hands, and session so any part can crash and resume | [Scaling Managed Agents](https://www.anthropic.com/engineering/managed-agents) |
+| `agent-reliability-and-change-management` | Ship a change to a running agent without degrading it, and keep a long run reliable | [A postmortem of three recent issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues) |
 | `sandboxing-agentic-systems` | Contain an agent that runs code or reads untrusted content, layer by layer | [How we contain Claude](https://www.anthropic.com/engineering/how-we-contain-claude) |
 | `defending-against-prompt-injection` | Keep an agent from obeying instructions hidden in the pages, emails, and files it reads | [Mitigate jailbreaks and prompt injection](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) |
 | `using-the-think-step` | Decide when a mid-task reasoning step helps and how to prompt for it | [The "think" tool](https://www.anthropic.com/engineering/claude-think-tool) |
@@ -65,7 +68,7 @@ These topics from the same blog have solid community skills, so they stay out of
 
 ## Provenance
 
-This pack distills public writing on the Anthropic engineering blog. It is an independent project with no endorsement from Anthropic, and it ships no Anthropic code.
+This pack distills public writing from Anthropic's engineering blog, research posts, and developer docs. It is an independent project with no endorsement from Anthropic, and it ships no Anthropic code.
 
 ## Contributing
 

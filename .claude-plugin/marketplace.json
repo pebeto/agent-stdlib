@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Agent-building practices from Anthropic's engineering blog, packaged as installable Claude Code components.",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
   "plugins": [
     {
       "name": "agent-stdlib",
       "source": "./",
-      "description": "Skills distilled from Anthropic's engineering blog: building evals, calibrating eval infrastructure, coding-agent tool design, durable agent architecture, sandboxing, defending against prompt injection, the think step, multi-agent orchestration, and parallel autonomous agents, plus MCP servers and hooks for tool-gating and prompt-injection screening.",
-      "version": "0.4.0",
+      "description": "Skills distilled from Anthropic's engineering blog, research, and docs: building evals, calibrating eval infrastructure, preventing reward hacking, coding-agent tool design, advanced tool use, durable agent architecture, agent reliability and change management, sandboxing, defending against prompt injection, the think step, multi-agent orchestration, and parallel autonomous agents, plus MCP servers and hooks for tool-gating and prompt-injection screening.",
+      "version": "0.5.0",
       "keywords": [
         "agents",
         "skills",
