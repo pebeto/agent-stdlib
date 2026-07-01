@@ -1,8 +1,8 @@
 # Contributing
 
-This pack distills Anthropic's engineering blog into installable Claude Code
-components. A contribution earns its place by closing a gap another skill leaves
-open.
+This pack distills Anthropic's engineering blog, research, and docs into
+installable, mostly harness-neutral components. A contribution earns its place by
+closing a gap another skill leaves open.
 
 ## Proposing a new skill
 

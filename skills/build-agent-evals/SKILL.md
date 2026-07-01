@@ -9,13 +9,14 @@ description: >-
   non-deterministic output, set up an LLM-as-judge, or asks any version of "how
   do I know if my agent is actually getting better." Trigger even when they say
   "tests for my agent," "eval set," or "agent benchmark" rather than the word
-  "evals." Not for container or resource limits making scores flaky across
+  "evals," or when they ask about benchmark contamination or a model recognizing
+  the eval. Not for container or resource limits making scores flaky across
   runs; that's calibrate-eval-infrastructure.
 ---
 
 # Build agent evals
 
-Source: [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). A standalone gist of this material exists but is undiscoverable; this skill packages it and adds the runnable metric script.
+Source: [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), with the section on keeping evals honest drawing on [Eval awareness in BrowseComp](https://www.anthropic.com/engineering/eval-awareness-browsecomp) and [Designing AI-resistant technical evaluations](https://www.anthropic.com/engineering/AI-resistant-technical-evaluations). A standalone gist of the core material exists but is undiscoverable; this skill packages it and adds the runnable metric script.
 
 An eval tells you whether a change to an agent made it better or worse. Without one you are guessing from vibes, and vibes miss regressions that only show up on the tenth run. Treat the eval suite the way you treat a unit-test suite: it has an owner, it grows when bugs slip through, and it fails loudly.
 
@@ -60,9 +61,19 @@ Start every trial from a fresh, isolated environment. A shared scratch directory
 - Watch for saturation. When the suite hits near 100% pass, it has stopped discriminating; add harder tasks pulled from recent failures.
 - Give the suite an owner. Unowned eval suites rot exactly like unowned tests.
 
+## Keep the eval honest as the model improves
+
+Two failure modes appear once the model is strong. Both inflate the score without a matching gain in skill.
+
+- **Contamination.** If a task or its answer leaked into training data, or an earlier agent in your pipeline left notes a later one reads, the model scores high by recall. Hold out a set the model has never seen, refresh it, and check that one agent's output does not seed another's eval.
+- **Eval awareness.** A capable model can notice it is inside a benchmark, name it, and shift how it acts, in one documented case locating the stored answers. A task that reads like a test invites this. Write tasks that look like real work, and treat a sudden jump on a familiar benchmark as a reason to inspect it.
+
+As the model beats each version of the suite, push the new tasks toward novel, out-of-distribution problems rather than harder variants of what it already handles. A problem the model has seen measures memory rather than the skill you are testing.
+
 ## Common mistakes
 
 - Grading the trajectory instead of the outcome, which punishes correct-but-unexpected solutions.
 - One-sided suites that reward an agent for doing too much.
 - A single run per task, reported as if it were the truth.
 - An LLM judge with a vague prompt, whose scores nobody audits.
+- A benchmark the model has seen or can recognize, whose score reflects memory over skill.

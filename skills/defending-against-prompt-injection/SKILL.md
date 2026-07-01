@@ -24,7 +24,7 @@ An agent that reads outside text inherits a new attacker: whoever wrote the page
 
 ## Keep untrusted content in tool_result blocks
 
-Put every piece of third-party text in a `tool_result` block. Claude is trained to treat instructions inside a tool result with suspicion, so a sentence that would hijack the agent from the system prompt carries far less weight there. The converse holds too: do not put your own instructions in a tool result, because the model discounts those as well. Send your instructions in a user turn after the result lands.
+Put every piece of third-party text in a `tool_result` block. Instruction-tuned models weight instructions inside a tool result below those in the system prompt, so a sentence that would hijack the agent from the system prompt carries far less weight there. The converse holds too: do not put your own instructions in a tool result, because the model discounts those as well. Send your instructions in a user turn after the result lands.
 
 ## Wrap the content as data
 
@@ -36,7 +36,7 @@ Tell the model what a block is and who produced it. "The following is the body o
 
 ## Screen tool output before the agent acts
 
-Run tool results through a fast classifier, such as Claude Haiku, before the main agent sees them. Ask the classifier for a structured boolean so you can branch on it in code. On a hit, hand the agent a stripped summary in place of the raw text and surface the flag to the user.
+Run tool results through a small, fast model before the main agent sees them. Ask it for a structured boolean so you can branch on it in code. On a hit, hand the agent a stripped summary in place of the raw text and surface the flag to the user.
 
 This pack ships a reference screen at `hooks/injection_screen.py`: a `PostToolUse` hook that flags common injection markers in fetched output using deterministic patterns. It is the inbound counterpart to the outbound `action_gate.py`. Swap its pattern list for a classifier call when you want real judgment, the same way the action gate does.
 

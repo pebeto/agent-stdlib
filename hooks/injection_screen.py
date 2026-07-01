@@ -23,7 +23,7 @@ Off by default. Set AGENT_STDLIB_INJECTION to turn it on:
   enforce       suspicious output is blocked; the agent must report and confirm
 
 This is a deterministic pattern matcher, not the article's classifier. Swap the
-MARKERS list for a fast classifier call (for example Claude Haiku returning a
+MARKERS list for a fast classifier call (a small, fast model returning a
 structured boolean) when you want real judgment; keep the inbound-screening
 stance and the flag-never-trust default. See hooks/README.md and the
 defending-against-prompt-injection skill. The hook screens WebFetch by default;

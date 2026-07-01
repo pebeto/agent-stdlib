@@ -2,9 +2,11 @@
 
 A standard library for building agents.
 
-Anthropic's engineering blog documents how to build, evaluate, and run agents in production. Most of that knowledge never ships as something you can install; it stays prose you reopen when you hit the problem it solves. `agent-stdlib` packages the parts nobody else has: Claude Code skills, a few MCP servers, and a tool-gating hook.
+Anthropic's engineering blog documents how to build, evaluate, and run agents in production. Most of that knowledge never ships as something you can install; it stays prose you reopen when you hit the problem it solves. `agent-stdlib` packages the parts nobody else has: a set of skills, a few MCP servers, and two safety hooks.
 
 Each component names the article it comes from and says how it differs from any skill that already covers similar ground. The pack ships only what was missing. Topics that strong community skills already handle stay out, with pointers below.
+
+It installs as a Claude Code plugin, and the skills, MCP servers, and scripts are harness-neutral underneath. To run them in OpenCode, Cursor, Cline, or a custom agent on any model, see [AGENTS.md](AGENTS.md).
 
 ## Skills
 
@@ -13,12 +15,14 @@ Each component names the article it comes from and says how it differs from any 
 | `build-agent-evals` | Build automated evals for an agent: pick a grader, choose pass@k vs pass^k, run the zero-to-one roadmap | [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) |
 | `calibrate-eval-infrastructure` | Stop container resource limits from swinging benchmark scores more than the models do | [Quantifying infrastructure noise in agentic coding evals](https://www.anthropic.com/engineering/infrastructure-noise) |
 | `reward-hacking-and-inoculation` | Keep an agent from gaming a checkable goal, with inoculation prompting and graders that pay for the work | [Emergent misalignment from reward hacking](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) |
+| `auditing-agent-behavior` | Red-team an agent automatically: an auditor runs scenarios, a judge scores deception, sycophancy, and more | [Petri, open-source auditing](https://www.anthropic.com/research/petri-open-source-auditing) |
 | `coding-agent-scaffold` | Design the two-tool (bash + file editor) interface for a coding agent so the model stops misusing it | [Raising the bar on SWE-bench Verified](https://www.anthropic.com/engineering/swe-bench-sonnet) |
 | `advanced-tool-use` | Reach a large tool catalog through a few tools: search on demand, call from code, learn from examples | [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use) |
 | `durable-agent-architecture` | Split an agent service into brain, hands, and session so any part can crash and resume | [Scaling Managed Agents](https://www.anthropic.com/engineering/managed-agents) |
 | `agent-reliability-and-change-management` | Ship a change to a running agent without degrading it, and keep a long run reliable | [A postmortem of three recent issues](https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues) |
 | `sandboxing-agentic-systems` | Contain an agent that runs code or reads untrusted content, layer by layer | [How we contain Claude](https://www.anthropic.com/engineering/how-we-contain-claude) |
 | `defending-against-prompt-injection` | Keep an agent from obeying instructions hidden in the pages, emails, and files it reads | [Mitigate jailbreaks and prompt injection](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) |
+| `constitutional-classifiers` | Screen an agent's input and output against a content policy you write, hardened with synthetic data | [Constitutional classifiers](https://www.anthropic.com/research/constitutional-classifiers) |
 | `using-the-think-step` | Decide when a mid-task reasoning step helps and how to prompt for it | [The "think" tool](https://www.anthropic.com/engineering/claude-think-tool) |
 | `multi-agent-orchestration` | Run an orchestrator-worker research system with parallel subagents | [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) |
 | `parallel-autonomous-agents` | Coordinate unsupervised agents on one git repo with lock files and an autonomy loop | [Building a C compiler with parallel Claudes](https://www.anthropic.com/engineering/building-c-compiler) |
@@ -57,9 +61,10 @@ Most of this pack is not Claude-specific. The MCP servers speak the open MCP pro
 
 ## Already covered elsewhere
 
-These topics from the same blog have solid community skills, so they stay out of this pack. Reach for these instead:
+These topics have solid coverage already, so they stay out of this pack. Reach for these instead:
 
 - **Choosing an agent pattern** (prompt chaining, routing, orchestrator-workers): `markpitt/claude-skills` → `agent-patterns`
+- **Authoring Agent Skills** (SKILL.md structure, progressive disclosure, description-as-trigger): Claude Code's built-in `skill-creator`
 - **Context engineering** (compaction, note-taking, just-in-time retrieval): `muratcankoylan/agent-skills-for-context-engineering`
 - **Designing agent or MCP tools** (consolidation, namespacing, token-efficient responses): the same pack's `tool-design`
 - **Long-running build harness** (initializer + coding agent, git-tracked state): `eddiearc/long-running-harness`
